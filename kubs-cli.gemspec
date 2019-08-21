@@ -2,23 +2,23 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'kubs/cli/version'
+require 'kubs_cli/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'kubs-cli'
-  spec.version       = Kubs::Cli::VERSION
+  spec.name          = 'kubs_cli'
+  spec.version       = KubsCLI::VERSION
   spec.authors       = ['paramagicdev']
   spec.email         = ['konnor5456@gmail.com']
 
-  spec.summary       = 'Konnor\' Ubuntu Based Setup & CLI'
-  spec.homepage      = "https://github.com/ParamagicDev/kubs-cli"
+  spec.summary       = 'Konnor\'s Ubuntu Based Setup & CLI'
+  spec.homepage      = 'https://github.com/ParamagicDev/kubs_cli'
   spec.license       = 'MIT'
 
-  spec.metadata['allowed_push_host'] = "https://rubygems.org"
+  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = "https://github.com/ParamagicDev/kubs-cli"
-  spec.metadata['changelog_uri'] = "https://github.com/ParamagicDev/kubs-cli/CHANGELOG.md"
+  spec.metadata['source_code_uri'] = 'https://github.com/ParamagicDev/kubs_cli'
+  spec.metadata['changelog_uri'] = 'https://github.com/ParamagicDev/kubs_cli/CHANGELOG.md'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -30,6 +30,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'guard', '~> 2.15'
+  spec.add_development_dependency 'guard-rspec', '~> 4.0'
+  spec.add_development_dependency 'pry', '~> 0.12.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'yard', '~> 0.9'
+  spec.add_runtime_dependency 'rake', '~> 10.0'
+  spec.add_runtime_dependency 'thor', '~> 0.20'
 end
