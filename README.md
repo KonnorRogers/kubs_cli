@@ -51,8 +51,6 @@ bundle exec rspec
 bundle exec rake spec
 ```
 
-Somethings may require escalation privileges. Password for sudo is: docker
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
