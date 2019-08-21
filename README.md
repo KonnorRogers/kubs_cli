@@ -1,8 +1,12 @@
-# Kubs::Cli
+# KubsCLI
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kubs/cli`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
+
+## Prerequisites
+
+Ruby 2.0+ (Tested with 2.6.2)
 
 ## Installation
 
@@ -18,7 +22,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kubs-cli
+    $ gem install kubs_cli
 
 ## Usage
 
