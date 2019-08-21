@@ -1,4 +1,6 @@
-require "kubs/cli/version"
+# frozen_string_literal: true
+
+require 'kubs/cli/version'
 
 module Kubs
   module Cli
