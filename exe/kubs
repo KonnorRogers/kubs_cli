@@ -2,3 +2,5 @@
 # frozen_string_literal: true
 
 require 'kubs_cli'
+
+KubsCLI::CLI.start(ARGV)
