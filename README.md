@@ -28,6 +28,31 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Testing
+
+```bash
+bundle install
+bundle exec rake spec
+
+# OR
+
+bundle exec rspec
+```
+
+### Testing in docker
+
+```bash
+docker build --tag=kubs-cli .
+docker run -it kubs-cli /bin/bash
+bundle exec rspec
+
+# OR
+
+bundle exec rake spec
+```
+
+Somethings may require escalation privileges. Password for sudo is: docker
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -36,7 +61,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/kubs-cli.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ParamagicDev/kubs_cli.
 
 ## License
 
