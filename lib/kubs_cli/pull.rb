@@ -1,6 +1,8 @@
 module KubsCLI
   # Used to pull items into your config-files repo
   class Pull
+    attr_writer :config
+
     def initialize(config = KubsCLI.configuration)
       @config = config
       @fh = FileHelper.new

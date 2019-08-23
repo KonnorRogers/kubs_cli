@@ -5,7 +5,7 @@ module KubsCLI
     attr_accessor :local_dir
 
     # remote files to be used
-    attr_accessor :config_files, :misc_files, :dotfiles
+    attr_accessor :config_files, :dotfiles, :gnome_terminal_settings
 
     def initialize
       # Values for items to be copied to
@@ -15,7 +15,7 @@ module KubsCLI
       # set to nil so that someone must set a path
       @config_files = nil
       @dotfiles = nil
-      @misc_files = nil
+      @gnome_terminal_settings = nil
     end
   end
 

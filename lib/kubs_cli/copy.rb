@@ -3,7 +3,10 @@
 require 'rake'
 
 module KubsCLI
+  # Copies from a repo to $HOME directory
   class Copy
+    attr_writer :config
+
     def intitialize(config: KubsCLI.configuration)
       @fh = FileHelper.new
       @config = config
