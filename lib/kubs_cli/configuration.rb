@@ -32,7 +32,7 @@ module KubsCLI
     @configuration = Configuration.new
   end
 
-  def self.load_configuration(file = File.join(Dir.home, '.vps_cli'))
+  def self.load_configuration(file = File.join(Dir.home, '.kubs', 'config.rb'))
     msg = 'Unable to location a configuration file. The default location is'
     msg += '$HOME/.kubs/config.rb'
     msg += "\nTo create a standard default config, run 'kubs init'"

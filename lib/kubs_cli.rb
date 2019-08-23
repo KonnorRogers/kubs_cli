@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-require 'kubs_cli/version'
 require 'kubs_cli/file_helper'
+require 'kubs_cli/configuration'
+require 'kubs_cli/version'
 require 'kubs_cli/cli'
 require 'kubs_cli/install'
+require 'kubs_cli/copy'
 
 # Top level class
 module KubsCLI
@@ -39,4 +41,5 @@ module KubsCLI
 
   # Allows access via KubsCLI.errors
   @errors ||= []
+  # KubsCLI.load_configuration
 end
