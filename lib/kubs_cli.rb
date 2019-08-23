@@ -5,15 +5,15 @@ require 'kubs_cli/version'
 # Top level class
 module KubsCLI
   class Error < StandardError; end
-
-  # Speciies class methods
+  # Specifies class methods
   class << self
     attr_accessor :errors
 
     # Adds an error to KubsCLI#errors
-    # @param e [Error]
-    def add_error(e:, msg: nil)
-      KubsCLI << e.exception(msg)
+    # @param error [Error]
+    # return Array<Error> Implicitly reutrns the array of errors
+    def add_error(error:, msg: nil)
+      KubsCLI.errors << error.exception(msg)
     end
 
     # Prints the errors when finished running
@@ -22,5 +22,6 @@ module KubsCLI
     end
   end
 
+  # Allows access via KubsCLI.errors
   @errors ||= []
 end
