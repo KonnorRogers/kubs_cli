@@ -13,4 +13,28 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:all) { silence_output }
+  config.after(:all) { enable_output }
+  config.before(:suite) do
+    TEST_FILES = File.join(File.expand_path(__dir__), 'test_files')
+  end
+end
+
+# Redirects stderr and stdout to /dev/null.
+def silence_output
+  @orig_stderr = $stderr
+  @orig_stdout = $stdout
+
+  # redirect stderr and stdout to /dev/null
+  $stderr = File.new('/dev/null', 'w')
+  $stdout = File.new('/dev/null', 'w')
+end
+
+# Replace stdout and stderr so anything else is output correctly.
+def enable_output
+  $stderr = @orig_stderr
+  $stdout = @orig_stdout
+  @orig_stderr = nil
+  @orig_stdout = nil
 end
