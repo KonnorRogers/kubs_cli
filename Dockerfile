@@ -1,6 +1,8 @@
 FROM ruby:2.6.3
 
 RUN apt update && apt upgrade -y
+
+# libffi needed for libffi gem
 RUN apt install -y libffi-dev apt-utils
 
 # copy the directory
