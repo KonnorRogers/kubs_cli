@@ -54,7 +54,7 @@ module KubsCLI
 
       orig_remote_contents = File.read(@config.gnome_terminal_settings)
 
-      Rake.sh("dconf dumb #{gnome_dconf} > #{@config.gnome_terminal_settings}")
+      Rake.sh("dconf dump #{gnome_dconf} > #{@config.gnome_terminal_settings}")
     rescue RuntimeError => e
       KubsCLI.add_error(e: e, msg: 'Ran into issues dumping gnome terminal settings')
 
