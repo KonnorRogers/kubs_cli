@@ -14,7 +14,7 @@ COPY . $HOME/myapp
 RUN gem install bundler
 RUN bundle install
 
-RUN rake build
+RUN rake build && gem install pkg/*
 
 
 # Create a user, and give them sudo privileges if needed
