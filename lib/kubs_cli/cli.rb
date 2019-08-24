@@ -17,7 +17,7 @@ module KubsCLI
     desc 'init', 'initializes the ~/.kubs dir'
     def init
       puts "Adding .kubs to #{Dir.home}..."
-      KubsCLI.create_config_dir(options[:config])
+      KubsCLI.create_config_dir
     end
 
     # desc 'copy [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies from KUBS_DOTFILES/* to $HOME/*'

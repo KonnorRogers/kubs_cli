@@ -12,6 +12,8 @@ COPY . /myapp
 RUN gem install bundler
 RUN bundle install
 
+ENTRYPOINT ["rake", "build"]
+
 
 # Create a user, and give them sudo privileges if needed
 # password is 'docker'
