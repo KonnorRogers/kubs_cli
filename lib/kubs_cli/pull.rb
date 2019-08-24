@@ -23,9 +23,9 @@ module KubsCLI
       remote = @config.dotfiles
       same_files(local: local, remote: remote).each do |ary|
         # local
-        l = ary[0]
+        l = File.join(File.join(local, ary[0]))
         # remote
-        r = ary[1]
+        r = File.join(File.join(remote, ary[1]))
 
         unless File.directory?(local) || File.directory?(remote)
           @fh.copy(from: l, to: r)
@@ -33,8 +33,8 @@ module KubsCLI
         end
 
         same_files(local: l, remote: r, remote_prefix: '').each do |nested_ary|
-          nested_local = nested_ary[0]
-          nested_remote = nested_ary[1]
+          nested_local = File.join(File.expand_path(nested_ary[0]), nested_ary[0])
+          nested_remote = File.expand_path(nested_ary[1])
 
           @fh.copy(from: nested_local, to: nested_remote)
         end
