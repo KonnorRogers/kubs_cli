@@ -31,7 +31,7 @@ module KubsCLI
     def copy_gnome_terminal_settings
       # This is the ONLY spot for gnome terminal
       gnome_path = '/org/gnome/terminal/'
-      gnome_file = File.join(config.gnome_terminal_settings)
+      gnome_file = @config.gnome_terminal_settings
 
       unless File.exist?(gnome_file)
         add_error(e: KubsCLI::Error, msg: "Could not find #{gnome_file}")
