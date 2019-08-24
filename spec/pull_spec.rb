@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'ostruct'
+
 module KubsCLI
   RSpec.describe Pull do
 
@@ -13,6 +15,8 @@ module KubsCLI
 
     context '#pull_dotfiles' do
       it 'should only pull dotfiles that already exist' do
+        FileUtils.mkdir(pull.config.local)
+        FileUtisl.touch(File.join(pull.config.local), ".file1")
         pull.pull_dotfiles
       end
     end

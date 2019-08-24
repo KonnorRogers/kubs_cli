@@ -19,44 +19,43 @@ module KubsCLI
 
     # Pulls dotfiles into your dotfiles inside your repo
     def pull_dotfiles
-      local = @config.local_dir
-      remote = @config.dotfiles
-      same_files(local: local, remote: remote).each do |ary|
-        # local
-        l = File.join(File.join(local, ary[0]))
-        # remote
-        r = File.join(File.join(remote, ary[1]))
+      dotfiles = @config.dotfiles
+      local_dir = @config.local_dir
 
-        unless File.directory?(local) || File.directory?(remote)
-          @fh.copy(from: l, to: r)
-          next
-        end
+      shared_dotfiles(dotfiles, local_dir) do |remote, local|
+        copy_files(local, remote)
+      end
+    end
 
-        same_files(local: l, remote: r, remote_prefix: '').each do |nested_ary|
-          nested_local = File.join(File.expand_path(nested_ary[0]), nested_ary[0])
-          nested_remote = File.expand_path(nested_ary[1])
+    def copy_files(orig_file, new_file)
+      unless File.directory?(orig_file) || File.directory?(new_file)
+        return @fh.copy(from: orig_file, to: new_file)
+      end
 
-          @fh.copy(from: nested_local, to: nested_remote)
+      Dir.each_child(orig_file) do |o_file|
+        Dir.each_child(new_file) do |n_file|
+          next unless o_file == n_file
+
+          o_file = File.join(File.expand_path(orig_file), o_file)
+          n_file = File.expand_path(new_file)
+
+          @fh.copy(from: o_file, to: n_file)
         end
       end
     end
 
-    def same_files(local:, remote:, remote_prefix: '.')
-      ary = []
+    def shared_dotfiles(dotfiles, local_dir)
+      Dir.each_child(dotfiles) do |remote_file|
+        Dir.each_child(local_dir) do |local_file|
+          next unless local_file == ".#{remote_file}"
 
-      Dir.each_child(local) do |l_file|
-        Dir.each_child(remote) do |r_file|
-          next if l_file != "#{remote_prefix}#{r_file}"
-
-          ary << [l_file, r_file]
+          remote_file = File.join(dotfiles, remote_file)
+          local_file = File.join(local_dir, local_file)
+          yield(remote_file, local_file)
         end
       end
-      ary
     end
 
-    def files_only(directory)
-      Dir["#{directory}/**/*"].reject { |f| File.directory?(f) }
-    end
 
     # Pulls gnome_terminal_settings into your dotfiles inside your repo
     def pull_gnome_terminal_settings
