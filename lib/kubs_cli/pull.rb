@@ -19,28 +19,39 @@ module KubsCLI
 
     # Pulls dotfiles into your dotfiles inside your repo
     def pull_dotfiles
-      # Dir.each_child(@config.local_dir) do |local|
-      #   Dir.each_child(@config.dotfiles) do |remote|
-      #     next if local != ".#{remote}"
+      local = @config.local_dir
+      remote = @config.dotfiles
+      same_files(local: local, remote: remote).each do |ary|
+        # local
+        l = ary[0]
+        # remote
+        r = ary[1]
 
-      #     local = File.join(@config.local_dir, local)
-      #     remote = File.join(@config.dotfiles, remote)
+        unless File.directory?(local) || File.directory?(remote)
+          @fh.copy(from: l, to: r)
+          next
+        end
 
-      #     @fh.copy(from: local, to: remote)
-      #   end
-      # end
-      # walk recursively
+        same_files(local: l, remote: r, prefix: '').each do |nested_ary|
+          nested_local = nested_ary[0]
+          nested_remote = nested_ary[1]
 
-      local_files = files_only(@config.local_dir)
-      remote_files = files_only(@config.dotfiles)
-
-      local_files.each do |l_file|
-        remote_files.each do |r_file|
-          next if l_file != ".#{r_file}"
-
-          @fh.copy(from: local, to: remote)
+          @fh.copy(from: nested_local, to: nested_remote)
         end
       end
+    end
+
+    def same_files(local:, remote:, remote_prefix: '.')
+      ary = []
+
+      Dir.each_child(local) do |l_file|
+        Dir.each_child(remote) do |r_file|
+          next if l_file != "#{remote_prefix}#{r_file}"
+
+          ary << [l_file, r_file]
+        end
+      end
+      ary
     end
 
     def files_only(directory)
