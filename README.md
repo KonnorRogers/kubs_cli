@@ -37,6 +37,12 @@ kubs git_pull
 kubs git_push
 ```
 
+### Extending
+
+The `$HOME/.kubs` is a good directory to check out
+
+The `$HOME/.kubs/dependencies.yaml` is structed to be extended without updating my gem
+
 ### Messing with docker
 
 ```bash
