@@ -32,7 +32,7 @@ module KubsCLI
       # walk recursively
 
       local_files = files_only(@config.local_dir)
-      remote_files = files_only(@config.remote_dir)
+      remote_files = files_only(@config.dotfiles)
 
       local_files.each do |l_file|
         remote_files.each do |r_file|
