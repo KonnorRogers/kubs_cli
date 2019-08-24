@@ -23,7 +23,6 @@ module KubsCLI
 
         expect(FileUtils.compare_file(File.join(pull.config.dotfiles, 'file2'),
                                       File.join(pull.config.local_dir, '.file2'))).to eq true
-        # expect(File.read(pull.config.local_dir, '.file2')).to eq "Hello World"
       end
     end
   end
