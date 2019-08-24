@@ -23,7 +23,7 @@ module KubsCLI
         Dir.children(@config.dotfiles).each do |remote|
           next if local != ".#{remote}"
 
-          local = File.join(@config.local_files, local)
+          local = File.join(@config.local_dir, local)
           remote = File.join(@config.dotfiles, remote)
 
           @fh.copy(from: local, to: remote)
