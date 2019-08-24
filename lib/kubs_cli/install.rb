@@ -3,9 +3,9 @@
 module KubsCLI
   # Used to install items from a YAML file
   class Install
-    def initialize(yaml_file:)
+    def initialize(config = Configuration.new)
       @fh = FileHelper.new
-      @yaml_file = yaml_file
+      @yaml_file = config.dependencies
     end
 
     # Installs dependencies from a given YAML file

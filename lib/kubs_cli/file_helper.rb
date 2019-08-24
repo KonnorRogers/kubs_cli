@@ -36,7 +36,6 @@ module KubsCLI
 
     private
 
-
     #:nodoc:
     def file_does_not_exist(file)
       return false if File.exist?(file)

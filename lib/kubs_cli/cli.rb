@@ -9,27 +9,34 @@ module KubsCLI
 
     desc 'version', 'prints the kubs-cli version information'
     def version
-      puts "kubs-cli version #{VpsCli::VERSION}"
+      puts "kubs-cli version #{KubsCLI::VERSION}"
     end
     map %w[-v --version] => :version
 
     desc 'init [-c CONFIG_DIRECTORY]', 'initializes the ~/.kubs dir'
     def init
       puts "Adding .kubs to #{Dir.home}..."
-      KubsCLI::Configuration.create_configuration(options[:config])
+      KubsCLI.create_configuration(options[:config])
     end
 
-    desc 'copy [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies from KUBS_DOTFILES/* to $HOME/*'
+    # desc 'copy [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies from KUBS_DOTFILES/* to $HOME/*'
+    desc 'copy', 'copies from KUBS_DOTFILES/* to $HOME/*'
     def copy
-      KubsCLI::Copy.new.copy_all
+      run_command { KubsCLI::Copy.new.copy_all }
     end
 
-    desc 'pull [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies to your config repo'
+    # desc 'pull [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies to your config repo'
+    desc 'pull', 'copies to your config repo'
     def pull
-      KubsCLI::Pull.new.pull_all
+      run_command { KubsCLI::Pull.new.pull_all }
     end
 
-    desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'
+    def install
+      run_command { KubsCLI::Install.new(options[:config]) }
+    end
+
+    # desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'
+    desc 'git_push', 'pushes your config_files upstream'
     def git_push
       message ||= 'auto push files'
 
@@ -42,7 +49,8 @@ module KubsCLI
       end
     end
 
-    desc 'git pull [-r CONFIG_FILES_REPO]', 'pulls your config_files downstream'
+    # desc 'git pull [-r CONFIG_FILES_REPO]', 'pulls your config_files downstream'
+    desc 'git_pull', 'pulls your config_files downstream'
     def git_pull
       swap_dir { Rake.sh('git pull') }
     rescue RuntimeError => e
@@ -60,6 +68,18 @@ module KubsCLI
         Rake.cd(KubsCLI.configuration.config_files)
         yield
       end
-    end
+
+      def config_file_not_found?(file)
+        return false if File.exist?(file)
+
+        puts "No config file found. Please run: 'kubs init'"
+        true
+      end
+
+      def run_command(file)
+        return if config_file_not_found?(file)
+        yield
+        KubsCLI.print_errors
+      end
   end
 end

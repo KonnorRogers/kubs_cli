@@ -4,6 +4,9 @@ module KubsCLI
     # local files
     attr_accessor :local_dir
 
+    # Dependencies to install
+    attr_accessor :dependencies
+
     # remote files to be used
     attr_accessor :config_files, :dotfiles, :gnome_terminal_settings
 
@@ -16,6 +19,7 @@ module KubsCLI
       @config_files = nil
       @dotfiles = nil
       @gnome_terminal_settings = nil
+      @dependencies = nil
     end
   end
 
@@ -43,7 +47,7 @@ module KubsCLI
   end
 
   def self.create_configuration(path = File.join(Dir.home, '.kubs'))
-    puts "Creating a default configuration files @ #{file}"
+    puts "Creating a default configuration files @ #{path}"
 
     create_config_dir(path)
   end
