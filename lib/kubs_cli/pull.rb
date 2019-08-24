@@ -32,7 +32,7 @@ module KubsCLI
           next
         end
 
-        same_files(local: l, remote: r, prefix: '').each do |nested_ary|
+        same_files(local: l, remote: r, remote_prefix: '').each do |nested_ary|
           nested_local = nested_ary[0]
           nested_remote = nested_ary[1]
 
