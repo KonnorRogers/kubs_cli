@@ -1,5 +1,5 @@
 apt:
-  command: sudo apt install -y
+  command: sudo apt install -y || apt install -y
   packages:
     # Libraries
     - software-properties-common gnupg2 less ufw ack-grep libfuse2
