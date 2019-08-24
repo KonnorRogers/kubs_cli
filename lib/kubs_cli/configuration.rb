@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KubsCLI
   # Used for keeping a consistent config across the entire project
   class Configuration

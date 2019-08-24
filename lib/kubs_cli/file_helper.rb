@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 require 'yaml'
 
@@ -32,7 +34,6 @@ module KubsCLI
     rescue StandardError => e
       KubsCLI.add_error(e: e, msg: "Unable to parse your YAML file - #{file}")
     end
-
 
     private
 

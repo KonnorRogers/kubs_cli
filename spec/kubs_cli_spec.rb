@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'fileutils'
 
 RSpec.describe KubsCLI do
@@ -20,7 +21,7 @@ RSpec.describe KubsCLI do
 
   context '#create_configuration_dir' do
     it 'Creates a configuration directory' do
-      test_config = File.join("spec", 'test_config')
+      test_config = File.join('spec', 'test_config')
       KubsCLI.create_config_dir(test_config)
       expect(File.exist?(test_config)).to eq(true)
 

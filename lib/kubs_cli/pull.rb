@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module KubsCLI
   # Used to pull items into your config-files repo
   class Pull
@@ -38,13 +40,11 @@ module KubsCLI
 
       Rake.sh("dconf dumb #{gnome_dconf} > #{@config.gnome_terminal_settings}")
     rescue RuntimeError => e
-      add_error(e: e, msg: "Ran into issues dumping gnome terminal settings")
+      add_error(e: e, msg: 'Ran into issues dumping gnome terminal settings')
 
       # if dconf errors, it will erase the config file contents
       # So this protects against that
       File.write(@config.gnome_terminal_settings, orig_remote_contents)
-
     end
   end
 end
-

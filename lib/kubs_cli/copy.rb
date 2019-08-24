@@ -18,7 +18,7 @@ module KubsCLI
     end
 
     def copy_dotfiles
-      puts "CONFIG:"
+      puts 'CONFIG:'
       p @config
       Dir.children(@config.dotfiles).each do |file|
         config_file = File.join(@config.dotfiles, file)
