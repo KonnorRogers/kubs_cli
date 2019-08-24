@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'fileutils'
 require 'ostruct'
 
 module KubsCLI
@@ -10,6 +11,8 @@ module KubsCLI
 
       Copy.new(config)
     end
+
+    after(:all) { FileUtils.rm_rf(copy.config.local_dir) }
 
     context '#copy_dotfiles' do
       it 'Should turn non dotfiles into dotfiles' do
