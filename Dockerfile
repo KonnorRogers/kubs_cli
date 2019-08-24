@@ -5,7 +5,7 @@ RUN apt update && apt upgrade -y
 # libffi needed for libffi gem
 RUN apt install -y libffi-dev apt-utils git
 
-RUN git clone https://github.com/ParamagicDev/config-files.git $HOME
+RUN git clone https://github.com/ParamagicDev/config-files.git $HOME/config-files
 
 # copy the directory
 RUN mkdir $HOME/myapp
