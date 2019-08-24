@@ -14,7 +14,7 @@ COPY . $HOME/myapp
 RUN gem install bundler
 RUN bundle install
 
-ENTRYPOINT ["rake", "build", "&&", "/bin/bash"]
+RUN rake build
 
 
 # Create a user, and give them sudo privileges if needed
