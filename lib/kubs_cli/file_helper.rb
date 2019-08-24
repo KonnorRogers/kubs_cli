@@ -13,6 +13,8 @@ module KubsCLI
     def copy(from:, to:)
       return if file_does_not_exist(from)
 
+      to_dir = File.dirname(File.expand_path(to))
+      Rake.mkdir_p(to_dir) unless Dir.exist?(to_dir)
       return Rake.cp(from, to) unless File.directory?(from)
 
       Rake.mkdir_p(to) unless Dir.exist?(to)
