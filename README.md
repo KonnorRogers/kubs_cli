@@ -6,7 +6,7 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Prerequisites
 
-Ruby 2.0+ (Tested with 2.6.2)
+Ruby 2.0+ (Tested with 2.6.[2-3])
 
 ## Installation
 
@@ -26,7 +26,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```bash
+gem install kubs_cli
+kubs -v # version
+kubs init # Creates a $HOME/.kubs directory
+kubs install # Installs items as defined by $HOME/.kubs/dependencies.yaml
+kubs copy # Copies from $HOME/config-files/(dotfiles|gnome-terminal-settings) to $HOME
+kubs pull # Copes from $HOME/.(dotfiles) to $HOME/config-files(dotfiles|gnome-terminal-settings)
+kubs git_pull
+kubs git_push
+```
+
+### Messing with docker
+
+```bash
+docker build --tag=kubs-cli .
+docker run -it kubs-cli /bin/bash
+```
 
 ## Testing
 
