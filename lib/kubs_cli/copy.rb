@@ -5,9 +5,9 @@ require 'rake'
 module KubsCLI
   # Copies from a repo to $HOME directory
   class Copy
-    attr_writer :config
+    attr_accessor :config
 
-    def intitialize(config: KubsCLI.configuration)
+    def intitialize(config = Configuration.new)
       @fh = FileHelper.new
       @config = config
     end
@@ -20,7 +20,7 @@ module KubsCLI
     def copy_dotfiles
       Dir.children(@config.dotfiles).each do |file|
         config_file = File.join(@config.dotfiles, file)
-        local_file = File.join(@config.local, ".#{file}")
+        local_file = File.join(@config.local_dir, ".#{file}")
 
         @fh.copy(from: config_file, to: local_file)
       end

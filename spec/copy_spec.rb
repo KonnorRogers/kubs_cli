@@ -1,13 +1,29 @@
-RSpec.describe KubsCLI::Copy do
-  KubsCLI.configure do |c|
-    c.dotfiles = 'test_files'
-    c.local_dir = 'local_test_files'
-  end
+# frozen_string_literal: true
 
-  let(:copy) { KubsCLI.copy.new }
+module KubsCLI
+  RSpec.describe Copy do
+    before(:each) do
+      KubsCLI.configure do |c|
+        c.dotfiles = 'test_files'
+        c.local_dir = 'local_test_files'
+      end
+    end
 
-  context "#copy_dotfiles" do
-    it 'Should turn non dotfiles into dotfiles' do
+    after(:each) do
+      KubsCLI.reset_configuration
+    end
+
+    let(:copy) { KubsCLI::Copy.new }
+
+    context '#copy_dotfiles' do
+      it 'Should turn non dotfiles into dotfiles' do
+
+        expect(KubsCLI.configuration.dotfiles).to eq('test_files')
+        copy.copy_dotfiles
+
+        ary = ['.dir', '.file1', 'file2']
+        expect(KubsCLI.local_dir).to match_array(ary)
+      end
     end
   end
 end

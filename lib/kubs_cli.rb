@@ -6,6 +6,7 @@ require 'kubs_cli/version'
 require 'kubs_cli/cli'
 require 'kubs_cli/install'
 require 'kubs_cli/copy'
+require 'kubs_cli/pull'
 
 # Top level class
 module KubsCLI

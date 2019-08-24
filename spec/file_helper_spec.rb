@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe KubsCLI::FileHelper do
-  let(:fh) { KubsCLI::FileHelper.new }
+module KubsCLI
+RSpec.describe FileHelper do
+  let(:fh) { FileHelper.new }
 
   context '#copy' do
     it 'Should add an error to KubsCli if no from file found' do
@@ -65,4 +66,5 @@ RSpec.describe KubsCLI::FileHelper do
       expect(hash).to be_an_instance_of(Hash)
     end
   end
+end
 end
