@@ -42,5 +42,4 @@ module KubsCLI
 
   # Allows access via KubsCLI.errors
   @errors ||= []
-  # KubsCLI.load_configuration
 end

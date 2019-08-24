@@ -25,17 +25,17 @@ module KubsCLI
     rescue StandardError => e
       KubsCLI.add_error(e: e, msg: "There was an issue with creating a dependencies array from #{@yaml_file}")
     end
-  end
 
-  # Installs dependencies from a give yaml_file via Rake.sh
-  # @return void
-  def install_all
-    ary = create_dependencies_ary
+    # Installs dependencies from a give yaml_file via Rake.sh
+    # @return void
+    def install_all
+      ary = create_dependencies_ary
 
-    ary.each do |command|
-      Rake.sh(command.to_s)
-    rescue StandardError => e
-      KubsCLI.add_error(e: e, msg: "Failed with #{command}")
+      ary.each do |command|
+        Rake.sh(command.to_s)
+      rescue StandardError => e
+        KubsCLI.add_error(e: e, msg: "Failed with #{command}")
+      end
     end
   end
 end
