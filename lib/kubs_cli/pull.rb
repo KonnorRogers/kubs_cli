@@ -19,16 +19,32 @@ module KubsCLI
 
     # Pulls dotfiles into your dotfiles inside your repo
     def pull_dotfiles
-      Dir.children(@config.local_dir).each do |local|
-        Dir.children(@config.dotfiles).each do |remote|
-          next if local != ".#{remote}"
+      # Dir.each_child(@config.local_dir) do |local|
+      #   Dir.each_child(@config.dotfiles) do |remote|
+      #     next if local != ".#{remote}"
 
-          local = File.join(@config.local_dir, local)
-          remote = File.join(@config.dotfiles, remote)
+      #     local = File.join(@config.local_dir, local)
+      #     remote = File.join(@config.dotfiles, remote)
+
+      #     @fh.copy(from: local, to: remote)
+      #   end
+      # end
+      # walk recursively
+
+      local_files = files_only(@config.local_dir)
+      remote_files = files_only(@config.remote_dir)
+
+      local_files.each do |l_file|
+        remote_files.each do |r_file|
+          next if l_file != ".#{r_file}"
 
           @fh.copy(from: local, to: remote)
         end
       end
+    end
+
+    def files_only(directory)
+      Dir["#{directory}/**/*"].reject { |f| File.directory?(f) }
     end
 
     # Pulls gnome_terminal_settings into your dotfiles inside your repo

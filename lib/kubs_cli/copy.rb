@@ -18,7 +18,7 @@ module KubsCLI
     end
 
     def copy_dotfiles
-      Dir.children(@config.dotfiles).each do |file|
+      Dir.each_child(@config.dotfiles) do |file|
         config_file = File.join(@config.dotfiles, file)
         local_file = File.join(@config.local_dir, ".#{file}")
 
