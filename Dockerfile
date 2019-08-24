@@ -3,16 +3,18 @@ FROM ruby:2.6.3
 RUN apt update && apt upgrade -y
 
 # libffi needed for libffi gem
-RUN apt install -y libffi-dev apt-utils
+RUN apt install -y libffi-dev apt-utils git
+
+RUN git clone https://github.com/ParamagicDev/config-files.git $HOME
 
 # copy the directory
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY . /myapp
+RUN mkdir $HOME/myapp
+WORKDIR $HOME/myapp
+COPY . $HOME/myapp
 RUN gem install bundler
 RUN bundle install
 
-ENTRYPOINT ["rake", "build"]
+ENTRYPOINT ["rake", "build", "&&", "/bin/bash"]
 
 
 # Create a user, and give them sudo privileges if needed
