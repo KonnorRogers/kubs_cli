@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kubs_cli (0.1.8)
+    kubs_cli (0.1.9)
       rake (~> 10.0)
       thor (~> 0.20)
 
