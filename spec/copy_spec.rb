@@ -6,8 +6,8 @@ require 'ostruct'
 module KubsCLI
   RSpec.describe Copy do
     let(:copy) do
-      local = File.join(File.expand_path(__dir__), 'local_test_files')
-      dotfiles = File.join(File.expand_path(__dir__), 'test_files')
+      local = File.join(TEST_FILES, 'local_test_files')
+      dotfiles = File.join(TEST_FILES)
       config = OpenStruct.new(dotfiles: dotfiles, local_dir: local)
 
       Copy.new(config)
@@ -15,7 +15,7 @@ module KubsCLI
 
     context '#copy_dotfiles' do
       it 'Should turn non dotfiles into dotfiles' do
-        expect(copy.config.dotfiles).to eq(File.join(File.expand_path(__dir__), 'test_files'))
+        expect(copy.config.dotfiles).to eq(TEST_FILES)
         test_files = %w[dir file1 file2]
         expect(Dir.children(copy.config.dotfiles)).to match_array(test_files)
 
