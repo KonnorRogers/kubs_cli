@@ -12,8 +12,6 @@ module KubsCLI
       Copy.new(config)
     end
 
-    after(:all) { FileUtils.rm_rf(copy.config.local_dir) }
-
     context '#copy_dotfiles' do
       it 'Should turn non dotfiles into dotfiles' do
         expect(copy.config.dotfiles).to eq(File.join(File.expand_path(__dir__), 'test_files'))
@@ -24,6 +22,7 @@ module KubsCLI
 
         ary = ['.dir', '.file1', '.file2']
         expect(Dir.children(copy.config.local_dir)).to match_array(ary)
+        FileUtils.rm_rf(copy.config.local_dir)
       end
     end
   end
