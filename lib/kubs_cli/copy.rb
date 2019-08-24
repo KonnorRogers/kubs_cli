@@ -36,7 +36,7 @@ module KubsCLI
         return
       end
 
-      dconf_load = "dconf load #{gnome_path} < #{config.misc_files}/gnome_terminal_settings"
+      dconf_load = "dconf load #{gnome_path} < #{config.gnome_terminal_settings}"
       Rake.sh(dconf_load)
     rescue RuntimeError => e
       KubsCLI.add_error(e: e, msg: 'Unable to copy gnome settings')
