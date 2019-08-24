@@ -46,16 +46,11 @@ module KubsCLI
     load file
   end
 
-  def self.create_configuration(path = File.join(Dir.home, '.kubs'))
+  def self.create_config_dir(path = File.join(Dir.home, '.kubs'))
+    fh = FileHelper.new
+
     puts "Creating a default configuration files @ #{path}"
-
-    create_config_dir(path)
-  end
-
-  private
-
-  def create_config_dir(path = File.join(Dir.home, '.kubs'))
-    mkdirs(path)
-    copy(from: EXAMPLES, to: path)
+    fh.mkdirs(path)
+    fh.copy(from: EXAMPLES, to: path)
   end
 end

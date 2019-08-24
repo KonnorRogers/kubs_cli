@@ -7,7 +7,7 @@ module KubsCLI
   class Copy
     attr_accessor :config
 
-    def intitialize(config = Configuration.new)
+    def initialize(config = Configuration.new)
       @fh = FileHelper.new
       @config = config
     end
@@ -18,6 +18,8 @@ module KubsCLI
     end
 
     def copy_dotfiles
+      puts "CONFIG:"
+      p @config
       Dir.children(@config.dotfiles).each do |file|
         config_file = File.join(@config.dotfiles, file)
         local_file = File.join(@config.local_dir, ".#{file}")

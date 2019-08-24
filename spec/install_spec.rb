@@ -1,11 +1,14 @@
 # frozen_string_literal: true
+require 'ostruct'
 
 module KubsCLI
   RSpec.describe Install do
-    root = File.expand_path('../', File.dirname(__FILE__))
-    DEPENDENCIES_FILE = File.join(root, 'lib',
+    ROOT = File.expand_path('../', File.dirname(__FILE__))
+    DEPENDENCIES_FILE = File.join(ROOT, 'lib',
                                   'examples', 'dependencies.yaml')
-    let(:install) { KubsCLI::Install.new(yaml_file: DEPENDENCIES_FILE) }
+
+    config = OpenStruct.new(dependencies: DEPENDENCIES_FILE)
+    let(:install) { KubsCLI::Install.new(config) }
 
     context '#create_dependencies_ary' do
       it "Should create an array in the form \#{command} \#{value}" do

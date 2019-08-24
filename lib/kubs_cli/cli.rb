@@ -13,10 +13,11 @@ module KubsCLI
     end
     map %w[-v --version] => :version
 
-    desc 'init [-c CONFIG_DIRECTORY]', 'initializes the ~/.kubs dir'
+    # desc 'init [-c CONFIG_DIRECTORY]', 'initializes the ~/.kubs dir'
+    desc 'init', 'initializes the ~/.kubs dir'
     def init
       puts "Adding .kubs to #{Dir.home}..."
-      KubsCLI.create_configuration(options[:config])
+      KubsCLI.create_config_dir(options[:config])
     end
 
     # desc 'copy [-d DOTFILES -g GNOME_TERMINAL_SETTINGS]', 'copies from KUBS_DOTFILES/* to $HOME/*'
@@ -31,8 +32,9 @@ module KubsCLI
       run_command { KubsCLI::Pull.new.pull_all }
     end
 
+    desc 'install', 'installs from .kubs/dependencies.yaml'
     def install
-      run_command { KubsCLI::Install.new(options[:config]) }
+      run_command { KubsCLI::Install.new }
     end
 
     # desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'
@@ -76,10 +78,12 @@ module KubsCLI
         true
       end
 
-      def run_command(file)
-        return if config_file_not_found?(file)
+      def run_command
+        return if config_file_not_found?(options[:config])
+
         yield
         KubsCLI.print_errors
       end
+    end
   end
 end

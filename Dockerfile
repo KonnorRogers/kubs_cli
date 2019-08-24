@@ -9,11 +9,12 @@ RUN apt install -y libffi-dev apt-utils
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY . /myapp
+RUN gem install bundler
+RUN bundle install
+
 
 # Create a user, and give them sudo privileges if needed
 # password is 'docker'
 # RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 # USER docker
 
-RUN gem install bundler
-RUN bundle install
