@@ -7,14 +7,14 @@ module KubsCLI
   class Copy
     attr_accessor :config
 
-    def initialize(config = Configuration.new)
+    def initialize(config = KubsCLI.configuration)
       @fh = FileHelper.new
       @config = config
     end
 
     def copy_all
-      copy_gnome_terminal_settings
       copy_dotfiles
+      copy_gnome_terminal_settings
     end
 
     def copy_dotfiles
@@ -32,14 +32,14 @@ module KubsCLI
       gnome_file = @config.gnome_terminal_settings
 
       unless File.exist?(gnome_file)
-        add_error(e: KubsCLI::Error, msg: "Could not find #{gnome_file}")
+        KubsCLI.add_error(e: KubsCLI::Error, msg: "Could not find #{gnome_file}")
         return
       end
 
       dconf_load = "dconf load #{gnome_path} < #{config.misc_files}/gnome_terminal_settings"
       Rake.sh(dconf_load)
     rescue RuntimeError => e
-      add_error(e: e, msg: 'Unable to copy gnome settings')
+      KubsCLI.add_error(e: e, msg: 'Unable to copy gnome settings')
     end
   end
 end

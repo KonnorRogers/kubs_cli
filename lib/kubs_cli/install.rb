@@ -3,7 +3,7 @@
 module KubsCLI
   # Used to install items from a YAML file
   class Install
-    def initialize(config = Configuration.new)
+    def initialize(config = KubsCLI.configuration)
       @fh = FileHelper.new
       @yaml_file = config.dependencies
     end
@@ -29,7 +29,7 @@ module KubsCLI
 
   # Installs dependencies from a give yaml_file via Rake.sh
   # @return void
-  def install_from_file
+  def install_all
     ary = create_dependencies_ary
 
     ary.each do |command|

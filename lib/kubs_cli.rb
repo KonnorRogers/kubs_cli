@@ -31,7 +31,7 @@ module KubsCLI
 
     # Prints the errors when finished running
     def print_errors
-      KubsCLI << errors.each { |e| puts e.message }
+      KubsCLI.errors.each { |e| puts e.message }
     end
 
     # Resets errors to a blank array

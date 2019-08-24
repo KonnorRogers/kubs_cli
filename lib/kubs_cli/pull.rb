@@ -3,7 +3,7 @@
 module KubsCLI
   # Used to pull items into your config-files repo
   class Pull
-    attr_writer :config
+    attr_accessor :config
 
     def initialize(config = KubsCLI.configuration)
       @config = config
@@ -19,7 +19,7 @@ module KubsCLI
 
     # Pulls dotfiles into your dotfiles inside your repo
     def pull_dotfiles
-      Dir.children(@config.local_files).each do |local|
+      Dir.children(@config.local_dir).each do |local|
         Dir.children(@config.dotfiles).each do |remote|
           next if local != ".#{remote}"
 
@@ -40,7 +40,7 @@ module KubsCLI
 
       Rake.sh("dconf dumb #{gnome_dconf} > #{@config.gnome_terminal_settings}")
     rescue RuntimeError => e
-      add_error(e: e, msg: 'Ran into issues dumping gnome terminal settings')
+      KubsCLI.add_error(e: e, msg: 'Ran into issues dumping gnome terminal settings')
 
       # if dconf errors, it will erase the config file contents
       # So this protects against that

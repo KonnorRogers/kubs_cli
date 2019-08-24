@@ -34,7 +34,7 @@ module KubsCLI
 
     desc 'install', 'installs from .kubs/dependencies.yaml'
     def install
-      run_command { KubsCLI::Install.new }
+      run_command { KubsCLI::Install.new.install_all }
     end
 
     # desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'
@@ -71,16 +71,8 @@ module KubsCLI
         yield
       end
 
-      def config_file_not_found?(file)
-        return false if File.exist?(file)
-
-        puts "No config file found. Please run: 'kubs init'"
-        true
-      end
-
       def run_command
-        return if config_file_not_found?(options[:config])
-
+        KubsCLI.load_configuration
         yield
         KubsCLI.print_errors
       end
