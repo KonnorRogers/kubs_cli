@@ -18,7 +18,7 @@ module KubsCLI
       return Rake.cp(from, to) unless File.directory?(from)
 
       Rake.mkdir_p(to) unless Dir.exist?(to)
-      Rake.cp_r(Dir["#{from}/*"], to)
+      Rake.cp_r(from, to)
     end
 
     # Creates dirs using Rake.mkdir_p if it does not exist

@@ -27,7 +27,7 @@ module KubsCLI
         fh.copy(from: from, to: to)
 
         from_files = Dir.children(from)
-        to_files = Dir.children(to)
+        to_files = Dir.children(File.join(to, 'dir'))
         expect(from_files).to match_array(to_files)
 
         FileUtils.rm_rf(to)
