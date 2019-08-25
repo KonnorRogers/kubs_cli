@@ -20,9 +20,9 @@ module KubsCLI
       Rake.mkdir_p(to)
 
       Dir["#{from}/*"].each do |dir|
-        next Rake.cp_r(dir, to) if File.directory?(dir)
+        Rake.cp_r(dir, to) # next if File.directory?(dir)
 
-        Rake.cp(dir, to)
+        # Rake.cp(dir, to)
       end
     end
 
