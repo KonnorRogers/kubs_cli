@@ -18,7 +18,7 @@ module KubsCLI
         command = value['command']
 
         packages = value['packages']
-        packages = packages.join("\n") if packages.is_a?(Array)
+        packages = packages.join(' ') if packages.is_a?(Array)
 
         "#{command} #{packages}"
       end
