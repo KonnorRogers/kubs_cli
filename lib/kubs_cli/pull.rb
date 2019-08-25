@@ -28,6 +28,7 @@ module KubsCLI
     end
 
     def copy_files(orig_file, new_file)
+      # @fh.copy(from: orig_file, to: new_file)
       return @fh.copy(from: orig_file, to: new_file) unless File.directory?(new_file)
       return @fh.copy(from: orig_file, to: new_file) unless File.directory?(orig_file)
 
