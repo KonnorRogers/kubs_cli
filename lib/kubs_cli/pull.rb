@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'rake'
 
 module KubsCLI
   # Used to pull items into your config-files repo
@@ -23,24 +24,25 @@ module KubsCLI
       local_dir = @config.local_dir
 
       shared_dotfiles(dotfiles, local_dir) do |remote, local|
-        @fh.copy(from: local, to: remote)
+        copy_files(local, remote)
       end
     end
 
     def copy_files(orig_file, new_file)
-      # @fh.copy(from: orig_file, to: new_file)
-      return @fh.copy(from: orig_file, to: new_file) unless File.directory?(new_file)
-      return @fh.copy(from: orig_file, to: new_file) unless File.directory?(orig_file)
+      if File.directory?(new_file) || File.directory?(new_file)
+        Dir.each_child(orig_file) do |o_file|
+          Dir.each_child(new_file) do |n_file|
+            next unless o_file == n_file
 
-      Dir.each_child(orig_file) do |o_file|
-        Dir.each_child(new_file) do |n_file|
-          next unless o_file == n_file
+            o_file = File.join(File.expand_path(orig_file), o_file)
+            n_file = File.expand_path(new_file)
 
-          o_file = File.join(File.expand_path(orig_file), o_file)
-          n_file = File.expand_path(new_file)
+            Rake.cp_r(o_file, n_file)
+          end
 
-          @fh.copy(from: o_file, to: n_file)
         end
+      else
+        Rake.cp(orig_file, new_file)
       end
     end
 
