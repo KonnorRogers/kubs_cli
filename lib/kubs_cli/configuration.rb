@@ -53,6 +53,9 @@ module KubsCLI
 
     puts "Creating a default configuration files @ #{path}"
     fh.mkdirs(path)
-    fh.copy(from: EXAMPLES, to: path)
+
+    Dir["#{EXAMPLES}/*"].each do |file|
+      fh.copy(from: file, to: path)
+    end
   end
 end
