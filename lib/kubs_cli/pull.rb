@@ -23,7 +23,7 @@ module KubsCLI
       local_dir = @config.local_dir
 
       shared_dotfiles(dotfiles, local_dir) do |remote, local|
-      @fh.copy(from: remote, to: local)
+        @fh.copy(from: local, to: remote)
       end
     end
 
