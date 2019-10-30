@@ -39,7 +39,7 @@ module KubsCLI
 
     # desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'
     desc 'git_push', 'pushes your config_files upstream'
-    def git_push
+    def git_push(message = nil)
       message ||= 'auto push files'
 
       swap_dir do
