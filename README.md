@@ -30,7 +30,9 @@ Or install it yourself as:
 gem install kubs_cli
 kubs -v # version
 kubs init # Creates a $HOME/.kubs directory
-kubs install # Installs items as defined by $HOME/.kubs/dependencies.yaml
+kubs install_dependencies # Installs items as defined by $HOME/.kubs/dependencies.yaml
+source ~/.zshrc # or ~/.bashrc, whatever youre using
+kubs install_packages
 kubs copy # Copies from $HOME/config-files/(dotfiles|gnome-terminal-settings) to $HOME
 kubs pull # Copes from $HOME/.(dotfiles) to $HOME/config-files(dotfiles|gnome-terminal-settings)
 kubs git_pull
@@ -41,7 +43,9 @@ kubs git_push
 
 The `$HOME/.kubs` is a good directory to check out
 
-The `$HOME/.kubs/dependencies.yaml` is structed to be extended without updating my gem
+The `$HOME/.kubs/dependencies.yaml` and `$HOME/.kubs/packages.yaml` are
+constructed to be extended without having to update the gem everytime
+I want to add something new
 
 ### Messing with docker
 
