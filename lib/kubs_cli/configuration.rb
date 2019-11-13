@@ -8,6 +8,7 @@ module KubsCLI
 
     # Dependencies to install
     attr_accessor :dependencies
+    attr_accessor :packages
 
     # remote files to be used
     attr_accessor :config_files, :dotfiles, :gnome_terminal_settings
@@ -20,6 +21,7 @@ module KubsCLI
       # set to nil so that someone must set a path
       @config_files = nil
       @dotfiles = nil
+      @packages = nil
       @gnome_terminal_settings = nil
       @dependencies = nil
     end

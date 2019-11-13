@@ -18,6 +18,8 @@ module KubsCLI
 
         FileUtils.touch(File.join(pull.config.local_dir, '.file2'))
         pull.pull_dotfiles
+
+        FileUtils.rm_rf(pull.config.local_dir)
       end
     end
 

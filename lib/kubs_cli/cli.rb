@@ -32,9 +32,15 @@ module KubsCLI
       run_command { KubsCLI::Pull.new.pull_all }
     end
 
-    desc 'install', 'installs from .kubs/dependencies.yaml'
-    def install
-      run_command { KubsCLI::Install.new.install_all }
+    desc 'install_dependencies', 'installs from .kubs/dependencies.yaml'
+    def install_dependencies
+      run_command { KubsCLI::Install.new.install_dependencies }
+      Rake.sh('echo "Restart your shell"')
+    end
+
+    desc 'install_packages', 'installs from .kubs/packages.yaml'
+    def install_packages
+      run_command { KubsCLI::Install.new.install_packages }
     end
 
     # desc 'git push [-r CONFIG_FILES_REPO]', 'pushes your config_files upstream'

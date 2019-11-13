@@ -5,15 +5,24 @@ module KubsCLI
   class Install
     def initialize(config = KubsCLI.configuration)
       @fh = FileHelper.new
-      @yaml_file = config.dependencies
+      @dependencies = config.dependencies
+      @packages = config.packages
+    end
+
+    def install_dependencies
+      install_from_file(@dependencies)
+    end
+
+    def install_packages
+      install_from_file(@packages)
     end
 
     # Installs dependencies from a given YAML file
     # @see lib/examples/dependencies.yaml
     # @return Array<String> Returns an array of strings to run via Rake to install
     #   various packages
-    def create_dependencies_ary
-      hash = @fh.load_yaml(@yaml_file)
+    def create_ary_from_yaml(file)
+      hash = @fh.load_yaml(file)
       hash.map do |_key, value|
         command = value['command']
 
@@ -23,13 +32,14 @@ module KubsCLI
         "#{command} #{packages}"
       end
     rescue StandardError => e
-      KubsCLI.add_error(e: e, msg: "There was an issue with creating a dependencies array from #{@yaml_file}")
+      msg = "There was an issue with creating a dependencies array from #{file}"
+      KubsCLI.add_error(e: e, msg: msg)
     end
 
     # Installs dependencies from a give yaml_file via Rake.sh
     # @return void
-    def install_all
-      ary = create_dependencies_ary
+    def install_from_file(file)
+      ary = create_ary_from_yaml(file)
 
       ary.each do |command|
         Rake.sh(command.to_s)
