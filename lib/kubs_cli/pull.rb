@@ -61,6 +61,9 @@ module KubsCLI
 
     # Pulls gnome_terminal_settings into your dotfiles inside your repo
     def pull_gnome_terminal_settings
+      unless @config.gnome_terminal_settings
+        return
+      end
       # This is where dconf stores gnome terminal
       gnome_dconf = '/org/gnome/terminal/'
 
