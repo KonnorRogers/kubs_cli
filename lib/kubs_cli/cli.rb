@@ -73,7 +73,7 @@ module KubsCLI
     no_commands do
       def swap_dir
         KubsCLI.load_configuration
-        Rake.cd(KubsCLI.configuration.config_files)
+        FileUtils.cd(KubsCLI.configuration.config_files)
         yield
       end
 
