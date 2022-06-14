@@ -14,15 +14,15 @@ module KubsCLI
       return if file_does_not_exist(from)
 
       to_dir = File.dirname(File.expand_path(to))
-      Rake.mkdir_p(to_dir) unless Dir.exist?(to_dir)
-      return Rake.cp(from, to) unless File.directory?(from)
+      FileUtils.mkdir_p(to_dir) unless Dir.exist?(to_dir)
+      return FileUtils.cp(from, to) unless File.directory?(from)
 
-      Rake.mkdir_p(to)
+      FileUtils.mkdir_p(to)
 
       Dir["#{from}/*"].each do |dir|
-        Rake.cp_r(dir, to) # next if File.directory?(dir)
+        FileUtils.cp_r(dir, to) # next if File.directory?(dir)
 
-        # Rake.cp(dir, to)
+        # FileUtils.cp(dir, to)
       end
     end
 
@@ -30,7 +30,7 @@ module KubsCLI
     # @param dirs [Array<String>] The names of the dirs to create
     # @return void
     def mkdirs(*dirs)
-      dirs.flatten.each { |dir| Rake.mkdir_p(dir) unless Dir.exist?(dir) }
+      dirs.flatten.each { |dir| FileUtils.mkdir_p(dir) unless Dir.exist?(dir) }
     end
 
     # Loads a YAML file

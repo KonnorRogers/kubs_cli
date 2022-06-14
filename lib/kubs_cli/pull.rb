@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'rake'
+require 'fileutils'
 
 module KubsCLI
   # Used to pull items into your config-files repo
@@ -37,12 +38,12 @@ module KubsCLI
             o_file = File.join(File.expand_path(orig_file), o_file)
             n_file = File.expand_path(new_file)
 
-            Rake.cp_r(o_file, n_file)
+            FileUtils.cp_r(o_file, n_file)
           end
 
         end
       else
-        Rake.cp(orig_file, new_file)
+        FileUtils.cp(orig_file, new_file)
       end
     end
 
