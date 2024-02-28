@@ -57,9 +57,7 @@ GEM
     rspec-support (3.11.0)
     shellany (0.0.1)
     thor (0.20.3)
-    webrick (1.7.0)
-    yard (0.9.27)
-      webrick (~> 1.7.0)
+    yard (0.9.35)
 
 PLATFORMS
   ruby
